@@ -1,6 +1,6 @@
 <template>
   <div class="input-container">
-    <textarea></textarea>
+    <textarea v-on:click="login"></textarea>
   </div>
 </template>
 <style scoped>
@@ -14,3 +14,12 @@ textarea {
   height: 100%;
 }
 </style>
+<script>
+export default {
+  methods: {
+    login() {
+      window.alert("ログインしろよ");
+    }
+  }
+};
+</script>
