@@ -1,10 +1,8 @@
 <template>
   <div class="app-layout">
     <div class="sidebar">
-      <p>チャンネル一覧</p>+
-      <p>#general</p>+
-      <p>#random</p>+
-      <p>#random</p>
+      <p>チャンネル一覧</p>
+      <p v-for="channel in channels" v-bind:key="channel.id">{{ channel.name }}</p>
     </div>
     <div class="main-content">
       <nuxt />
@@ -98,7 +96,6 @@ export default {
         querySnapshot.forEach(doc => {
           this.channels.push(doc.data());
         });
-        console.log(this.channels);
       });
   }
 };
