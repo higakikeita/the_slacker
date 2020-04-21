@@ -9,7 +9,9 @@ if (!firebase.apps.length) {
     databaseURL: "https://theslacker-4f1ad.firebaseio.com",
     projectId: "theslacker-4f1ad",
     storageBucket: "theslacker-4f1ad.appspot.com",
-    messagingSenderId: "240877171712"
+    messagingSenderId: "240877171712",
+    appId: "1:240877171712:web:85187f53dbc079b09014e5",
+    measurementId: "G-SMQMN091S7",
   }
   firebase.initializeApp(config)
 }
