@@ -1,18 +1,6 @@
 <template>
   <div class="chats-container">
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
-    <message />
+    <message v-for="message in messages" :message="message" v-bind:key="message.id" />
   </div>
 </template>
 <script>
