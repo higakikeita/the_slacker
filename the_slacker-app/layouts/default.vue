@@ -82,3 +82,24 @@ html {
 }
 </style>
 
+<script>
+import { db } from "~/plugins/firebase";
+
+export default {
+  data() {
+    return {
+      channels: []
+    };
+  },
+  mounted() {
+    db.collection("channels")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          this.channels.push(doc.data());
+        });
+        console.log(this.channels);
+      });
+  }
+};
+</script>
