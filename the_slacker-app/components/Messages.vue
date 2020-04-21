@@ -19,8 +19,12 @@
 import Message from "~/components/Message";
 
 export default {
+  props: ["messages"],
   components: {
     Message
+  },
+  mounted() {
+    console.log(this.messages);
   }
 };
 </script>
