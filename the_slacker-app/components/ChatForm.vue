@@ -1,7 +1,7 @@
 <template>
   <div class="input-container">
-    <textarea v-model="text" v-on:keydown.enter="addMessage"></textarea>
-    <el-dialog title="Tips" :visible="dialogVisible" width="30%">
+    <textarea v-model="text" v-on:click="openLoginModal" v-on:keydown.enter="addMessage"></textarea>
+    <el-dialog title="Tips" :visible.sync="dialogVisible" width="30%">
       <span>This is a message</span>
     </el-dialog>
   </div>
@@ -26,11 +26,14 @@ Vue.use(ElementUI);
 export default {
   data() {
     return {
-      dialogVisible: true,
+      dialogVisible: false,
       text: null
     };
   },
   methods: {
+    openLoginModal() {
+      this.dialogVisible = true;
+    },
     addMessage(event) {
       if (this.keyDownedForJPConversion(event)) {
         return;
