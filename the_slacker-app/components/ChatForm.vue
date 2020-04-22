@@ -1,6 +1,7 @@
 <template>
   <div class="input-container">
     <textarea v-model="text"></textarea>
+    <button v-on:click="checkTextValue">値を確認！</button>
   </div>
 </template>
 <style scoped>
@@ -20,6 +21,11 @@ export default {
     return {
       text: "テスト"
     };
+  },
+  methods: {
+    checkTextValue() {
+      console.log(this.text);
+    }
   }
 };
 </script>
