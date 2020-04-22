@@ -1,6 +1,6 @@
 <template>
   <div class="input-container">
-    <textarea v-on:click="login"></textarea>
+    <textarea v-model="text"></textarea>
   </div>
 </template>
 <style scoped>
@@ -16,10 +16,10 @@ textarea {
 </style>
 <script>
 export default {
-  methods: {
-    login() {
-      window.alert("ログインしろよ");
-    }
+  data() {
+    return {
+      text: "テスト"
+    };
   }
 };
 </script>
