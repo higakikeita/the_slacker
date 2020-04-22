@@ -23,15 +23,26 @@ export default {
     };
   },
   methods: {
-    addMessage() {
+    addMessage(event) {
+      if (this.keyDownedForJPConversion(event)) {
+        return;
+      }
       const channelId = this.$route.params.id;
       db.collection("channels")
         .doc(channelId)
         .collection("messages")
-        .add({ text: this.text })
-        .then(() => {
-          alert("メッセージの保存に成功しました");
+        .onSnapshot(snapshot => {
+          snapshot.docChanges().forEach(change => {
+            const doc = change.doc;
+            if (change.type === "added") {
+              this.messages.push({ id: doc.id, ...doc.data() });
+            }
+          });
         });
+    },
+    keyDownedForJPConversion(event) {
+      const codeForConversion = 229;
+      return event.keyCode === codeForConversion;
     }
   }
 };
