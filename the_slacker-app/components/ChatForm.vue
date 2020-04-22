@@ -3,7 +3,7 @@
     <textarea v-model="text" v-on:click="openLoginModal" v-on:keydown.enter="addMessage"></textarea>
     <el-dialog title :visible.sync="dialogVisible" width="30%">
       <div class="image-container">
-        <img src="~/assets/google_sign_in.png" />
+        <img src="~/assets/google_sign_in.png" v-on:click="login" />
       </div>
     </el-dialog>
   </div>
@@ -63,6 +63,20 @@ export default {
     keyDownedForJPConversion(event) {
       const codeForConversion = 229;
       return event.keyCode === codeForConversion;
+    },
+    login() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+          this.dialogVisible = false;
+        })
+        .catch(error => {
+          window.alert(error);
+        });
     }
   }
 };
