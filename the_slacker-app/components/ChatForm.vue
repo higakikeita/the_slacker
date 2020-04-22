@@ -1,7 +1,6 @@
 <template>
   <div class="input-container">
-    <textarea v-model="text"></textarea>
-    <button v-on:click="checkTextValue">値を確認！</button>
+    <textarea v-model="text" v-on:keydown.enter="addMessage"></textarea>
   </div>
 </template>
 <style scoped>
@@ -16,15 +15,23 @@ textarea {
 }
 </style>
 <script>
+import { db } from "~/plugins/firebase";
 export default {
   data() {
     return {
-      text: "テスト"
+      text: null
     };
   },
   methods: {
-    checkTextValue() {
-      console.log(this.text);
+    addMessage() {
+      const channelId = this.$route.params.id;
+      db.collection("channels")
+        .doc(channelId)
+        .collection("messages")
+        .add({ text: this.text })
+        .then(() => {
+          alert("メッセージの保存に成功しました");
+        });
     }
   }
 };
