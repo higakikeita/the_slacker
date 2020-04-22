@@ -31,13 +31,9 @@ export default {
       db.collection("channels")
         .doc(channelId)
         .collection("messages")
-        .onSnapshot(snapshot => {
-          snapshot.docChanges().forEach(change => {
-            const doc = change.doc;
-            if (change.type === "added") {
-              this.messages.push({ id: doc.id, ...doc.data() });
-            }
-          });
+        .add({ text: this.text })
+        .then(() => {
+          this.text = null;
         });
     },
     keyDownedForJPConversion(event) {
