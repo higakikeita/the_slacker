@@ -31,7 +31,10 @@ export default {
       db.collection("channels")
         .doc(channelId)
         .collection("messages")
-        .add({ text: this.text })
+        .add({
+          text: this.text,
+          createdAt: new Date().getTime()
+        })
         .then(() => {
           this.text = null;
         });
