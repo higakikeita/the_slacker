@@ -1,6 +1,7 @@
 <template>
   <div class="input-container">
-    <textarea v-model="text" v-on:click="openLoginModal" v-on:keydown.enter="addMessage"></textarea>
+    <textarea v-model="text" v-if="isAuthenticated" v-on:keydown.enter="addMessage"></textarea>
+    <textarea v-model="text" v-else v-on:click="openLoginModal"></textarea>
     <el-dialog title :visible.sync="dialogVisible" width="30%">
       <div class="image-container">
         <img src="~/assets/google_sign_in.png" v-on:click="login" />
