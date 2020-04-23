@@ -1,5 +1,6 @@
 <template>
   <div class="input-container">
+    <img v-if="isAuthenticated" :src="user.photoURL" class="avatar" />
     <textarea v-model="text" v-if="isAuthenticated" v-on:keydown.enter="addMessage"></textarea>
     <textarea v-model="text" v-else v-on:click="openLoginModal"></textarea>
     <el-dialog title :visible.sync="dialogVisible" width="30%">
@@ -13,8 +14,12 @@
 .input-container {
   padding: 10px;
   height: 100%;
+  display: flex;
 }
-
+.avatar {
+  height: 100%;
+  width: auto;
+}
 textarea {
   width: 100%;
   height: 100%;
@@ -43,6 +48,9 @@ export default {
     };
   },
   computed: {
+    user() {
+      return this.$store.state.user;
+    },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     }
@@ -62,7 +70,11 @@ export default {
         .collection("messages")
         .add({
           text: this.text,
-          createdAt: new Date().getTime()
+          createdAt: new Date().getTime(),
+          user: {
+            name: this.user.displayName,
+            thumbnail: this.user.photoURL
+          }
         })
         .then(() => {
           this.text = null;
